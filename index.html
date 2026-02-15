@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReliefVision | PBL Project</title>
+
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">ReliefVision</div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#progress">Progress</a></li>
+        <li><a href="#future">Future</a></li>
+        <li><a href="#demo">Live Demo</a></li>
+    </ul>
+</nav>
+
+<header class="hero">
+    <h1>ReliefVision</h1>
+    <h2>Satellite-Based Disaster Damage Assessment System</h2>
+    <div class="author-info">
+        <p><strong>Bhumija Goswami</strong></p>
+        <p>Reg No: 2427030257</p>
+        <p>PBL Guide: Dr Ajay Kumar</p>
+    </div>
+</header>
+
+<section id="about" class="section reveal">
+    <h2>About the Project</h2>
+    <p>
+        ReliefVision is an intelligent disaster assessment platform that leverages
+        Structural Similarity Index (SSIM) and computer vision techniques to analyze
+        satellite imagery and detect structural changes caused by natural disasters.
+    </p>
+</section>
+
+<section id="problem" class="section reveal">
+    <h2>Problem Statement</h2>
+    <p>
+        Manual disaster impact analysis using satellite imagery is slow and resource-intensive.
+        There is a need for automated systems capable of detecting affected regions
+        and quantifying damage efficiently.
+    </p>
+</section>
+
+<section id="solution" class="section reveal">
+    <h2>Proposed Solution</h2>
+    <p>
+        ReliefVision compares pre-disaster and post-disaster satellite imagery,
+        applies SSIM-based structural comparison, segments impacted regions,
+        and estimates the percentage of affected area.
+    </p>
+</section>
+
+<section id="methodology" class="section reveal">
+    <h2>Methodology</h2>
+    <div class="grid">
+        <div class="card">Image Upload</div>
+        <div class="card">Preprocessing</div>
+        <div class="card">Cloud Masking</div>
+        <div class="card">SSIM Analysis</div>
+        <div class="card">Thresholding</div>
+        <div class="card">Morphological Processing</div>
+        <div class="card">Contour Detection</div>
+        <div class="card">Damage Estimation</div>
+    </div>
+</section>
+
+<section id="progress" class="section reveal">
+    <h2>Implementation Progress</h2>
+    <ul>
+        <li>SSIM-based structural detection implemented</li>
+        <li>Cloud masking integrated</li>
+        <li>Sensitivity control slider added</li>
+        <li>Streamlit web application deployed</li>
+        <li>GitHub-hosted documentation portal created</li>
+    </ul>
+</section>
+
+<section id="future" class="section reveal">
+    <h2>Future Scope</h2>
+    <ul>
+        <li>Automatic image alignment</li>
+        <li>NDVI & spectral index integration</li>
+        <li>Google Earth Engine API integration</li>
+        <li>ML-based severity classification</li>
+        <li>Time-series disaster intelligence dashboard</li>
+    </ul>
+</section>
+
+<section id="demo" class="section demo reveal">
+    <h2>Live Application</h2>
+    <a href="https://reliefvision.streamlit.app" target="_blank" class="demo-btn">
+        Launch ReliefVision
+    </a>
+</section>
+
+<footer>
+    <p>© 2026 ReliefVision | Developed by Bhumija Goswami</p>
+</footer>
+
+<div id="visit-timer">00:00</div>
+
+<script>
+let seconds = 0;
+function formatTime(sec) {
+    let m = Math.floor(sec / 60);
+    let s = sec % 60;
+    return (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
+}
+setInterval(() => {
+    seconds++;
+    document.getElementById("visit-timer").innerText = formatTime(seconds);
+}, 1000);
+
+const reveals = document.querySelectorAll(".reveal");
+window.addEventListener("scroll", () => {
+    reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
