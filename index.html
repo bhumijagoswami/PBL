@@ -6,16 +6,73 @@
 <title>ReliefVision | PBL 2026</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+body {
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* FIX SCROLL OFFSET */
+section {
+    scroll-margin-top: 120px;
+}
+
+/* GLASS */
+.glass {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+.glass:hover {
+    transform: translateY(-6px);
+}
+
+/* TEXT */
+.gradient-text {
+    background: linear-gradient(90deg,#60a5fa,#a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* BUTTON */
+.btn {
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,#3b82f6,#6366f1);
+    font-weight: 700;
+}
+
+/* WORKFLOW */
+.workflow {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.workflow div {
+    padding: 10px 16px;
+}
+.arrow {
+    align-self: center;
+    font-size: 20px;
+    opacity: 0.6;
+}
+</style>
 </head>
 
 <body onload="startTimer()">
 
-<nav class="navbar">
-<h1>ReliefVision</h1>
-<div class="nav-links">
+<!-- NAV -->
+<nav class="fixed w-full z-50 glass px-10 py-4 flex justify-between">
+<h1 class="font-bold">ReliefVision</h1>
+<div class="hidden md:flex gap-8 text-sm">
 <a href="#about">About</a>
 <a href="#problem">Problem</a>
 <a href="#solution">Solution</a>
@@ -26,99 +83,116 @@
 </div>
 </nav>
 
-<main class="container">
+<main class="max-w-5xl mx-auto px-6 pt-40 space-y-40 text-center">
 
-<section class="hero">
-<h1 class="gradient-text">ReliefVision</h1>
+<!-- HERO -->
+<section>
+<h1 class="text-7xl font-extrabold mb-6">
+<span class="gradient-text">ReliefVision</span>
+</h1>
 
-<p>
+<p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
 An AI-powered disaster detection and decision support system that leverages satellite imagery and computer vision techniques to identify damage, assess severity, and assist in rapid response planning.
 </p>
 
-<div class="info">
+<div class="mt-8 text-sm text-slate-500 space-y-1">
 <p><strong>Bhumija Goswami</strong></p>
 <p>Reg No: 2427030257</p>
 <p>Guide: Dr Ajay Kumar</p>
 </div>
 </section>
 
-<section id="about" class="card">
-<h2>About the Project</h2>
-<p>
-ReliefVision processes pre- and post-disaster satellite images using Structural Similarity Index (SSIM). It detects structural changes, estimates damage severity, and generates prioritized alerts for disaster response.
+<!-- ABOUT -->
+<section id="about" class="glass p-10 rounded-3xl">
+<h2 class="text-3xl font-bold mb-6">About the Project</h2>
+<p class="text-slate-400 leading-relaxed">
+ReliefVision is designed as an intelligent disaster analysis system that processes pre- and post-disaster satellite images using Structural Similarity Index (SSIM). 
+The system detects structural changes, estimates damage severity, and generates prioritized alerts to support decision-making during emergency response scenarios.
 </p>
 </section>
 
-<section id="problem" class="two-col">
-<div class="card">
-<h2>Problem Statement</h2>
-<p>
-Traditional disaster analysis is manual and slow, leading to delayed emergency response and inefficient resource allocation.
+<!-- PROBLEM + NEED -->
+<section id="problem" class="grid md:grid-cols-2 gap-10">
+<div class="glass p-8 rounded-3xl border-l-4 border-blue-500">
+<h2 class="text-2xl font-bold mb-4">Problem Statement</h2>
+<p class="text-slate-400 leading-relaxed">
+Natural disasters such as floods, wildfires, and earthquakes result in large-scale destruction. 
+Traditional analysis of satellite imagery is manual, time-consuming, and prone to delays, which significantly impacts response time and resource allocation.
 </p>
 </div>
 
-<div class="card">
-<h2>Need for System</h2>
-<p>
-An automated system is required to quickly detect damage, evaluate severity, and provide actionable insights for disaster management authorities.
+<div class="glass p-8 rounded-3xl border-l-4 border-blue-500">
+<h2 class="text-2xl font-bold mb-4">Need for System</h2>
+<p class="text-slate-400 leading-relaxed">
+There is a critical need for automated systems that can rapidly analyze satellite data, detect damage, assess severity levels, and provide actionable insights to assist disaster management authorities in making faster and more informed decisions.
 </p>
 </div>
 </section>
 
-<section id="solution" class="card">
-<h2>Proposed Solution</h2>
-<p>
-The system uses SSIM to compare satellite images, classify damage severity, assign priority levels, and generate alerts with recommended actions.
+<!-- SOLUTION -->
+<section id="solution" class="glass p-10 rounded-3xl">
+<h2 class="text-3xl font-bold mb-6">Proposed Solution</h2>
+<p class="text-slate-400 leading-relaxed">
+The proposed system compares pre- and post-event satellite images using SSIM to identify structural changes. 
+It classifies damage into severity levels (Low, Medium, High), assigns priority scores, and generates alerts with recommended actions, transforming raw image analysis into a complete decision-support pipeline.
 </p>
 </section>
 
+<!-- METHODOLOGY -->
 <section id="methodology">
-<h2>Methodology</h2>
-<div class="grid">
-<div class="card">Image Acquisition</div>
-<div class="card">Preprocessing</div>
-<div class="card">Cloud Masking</div>
-<div class="card">SSIM Computation</div>
-<div class="card">Thresholding</div>
-<div class="card">Damage Estimation</div>
+<h2 class="text-4xl font-bold mb-12">Methodology</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+<div class="glass p-6">Image Acquisition</div>
+<div class="glass p-6">Preprocessing</div>
+<div class="glass p-6">Cloud Masking</div>
+<div class="glass p-6">SSIM Computation</div>
+<div class="glass p-6">Thresholding</div>
+<div class="glass p-6">Damage Estimation</div>
 </div>
 </section>
 
+<!-- WORKFLOW -->
 <section id="workflow">
-<h2>System Workflow</h2>
+<h2 class="text-4xl font-bold mb-12">System Workflow</h2>
+
 <div class="workflow">
-<div class="card">Input</div>
-<span>→</span>
-<div class="card">SSIM</div>
-<span>→</span>
-<div class="card">Detection</div>
-<span>→</span>
-<div class="card">Severity</div>
-<span>→</span>
-<div class="card">Priority</div>
-<span>→</span>
-<div class="card">Alerts</div>
+<div class="glass">Input</div>
+<div class="arrow">→</div>
+<div class="glass">SSIM</div>
+<div class="arrow">→</div>
+<div class="glass">Detection</div>
+<div class="arrow">→</div>
+<div class="glass">Severity</div>
+<div class="arrow">→</div>
+<div class="glass">Priority</div>
+<div class="arrow">→</div>
+<div class="glass">Alerts</div>
 </div>
 </section>
 
-<section id="alerts" class="card">
-<h2>Alert System</h2>
-<p>
-Generates alerts with severity classification, priority ranking, and recommended actions for response teams.
+<!-- ALERT -->
+<section id="alerts" class="glass p-10 rounded-3xl">
+<h2 class="text-3xl font-bold mb-6">Alert & Decision System</h2>
+<p class="text-slate-400 leading-relaxed">
+The system generates intelligent alerts based on detected damage severity. Each alert includes severity classification, priority ranking, and suggested response actions such as immediate rescue operations, monitoring, or low-risk observation.
 </p>
 </section>
 
-<section id="future" class="card">
-<h2>Future Scope</h2>
-<ul>
-<li>Real-time satellite APIs</li>
-<li>Weather integration</li>
-<li>Deep learning classification</li>
-<li>GIS mapping</li>
+<!-- FUTURE -->
+<section id="future" class="glass p-10 rounded-3xl">
+<h2 class="text-3xl font-bold mb-6">Future Scope</h2>
+
+<ul class="text-slate-400 space-y-2">
+<li>• Integration with real-time satellite APIs</li>
+<li>• Incorporation of weather data for contextual analysis</li>
+<li>• Advanced deep learning-based damage classification</li>
+<li>• GIS-based geospatial visualization</li>
 </ul>
 </section>
 
-<section class="demo">
+<!-- DEMO -->
+<section class="mt-10">
 <a href="https://reliefvision.streamlit.app" target="_blank" class="btn">
 🚀 Launch Live Demo
 </a>
@@ -126,14 +200,18 @@ Generates alerts with severity classification, priority ranking, and recommended
 
 </main>
 
-<footer>
+<footer class="text-center py-12 text-slate-500 mt-20">
 © 2026 ReliefVision | Bhumija Goswami
 </footer>
 
 <script>
 let sec=0;
 function startTimer(){
-setInterval(()=>{sec++;},1000);
+setInterval(()=>{
+sec++;
+let m=Math.floor(sec/60);
+let s=sec%60;
+},1000);
 }
 </script>
 
