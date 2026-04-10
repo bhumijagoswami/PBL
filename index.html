@@ -6,95 +6,16 @@
 <title>ReliefVision | PBL 2026</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-
-body {
-    background: radial-gradient(circle at top, #0f172a, #020617);
-    color: #f8fafc;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    scroll-behavior: smooth;
-}
-
-/* GLASS */
-.glass {
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s;
-}
-.glass:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-}
-
-/* TEXT */
-.gradient-text {
-    background: linear-gradient(90deg,#60a5fa,#a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* BUTTON */
-.btn {
-    display: inline-block;
-    padding: 14px 30px;
-    border-radius: 999px;
-    background: linear-gradient(90deg,#3b82f6,#6366f1);
-    font-weight: 700;
-    letter-spacing: 1px;
-    transition: 0.3s;
-}
-.btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px rgba(59,130,246,0.7);
-}
-
-/* TIMER */
-#timerContainer {
-    background: white;
-    color: black;
-    border: 3px solid #3b82f6;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-}
-
-/* BULLET FIX */
-ul {
-    list-style-position: inside;
-    padding-left: 0;
-}
-ul li {
-    margin-bottom: 10px;
-}
-
-/* REVEAL */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 0.8s ease;
-}
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-</style>
 </head>
 
 <body onload="startTimer()">
 
-<!-- TIMER -->
-<div id="timerContainer" class="fixed bottom-8 right-8 px-6 py-3 rounded-xl flex items-center gap-3 z-50">
-<i class="fas fa-hourglass-start text-blue-600"></i>
-<span id="displayTime" class="text-xl font-bold">00:00</span>
-</div>
-
-<!-- NAV -->
-<nav class="fixed w-full z-50 glass px-10 py-4 flex justify-between items-center">
-<h1 class="font-extrabold text-lg tracking-wide">ReliefVision</h1>
-<div class="hidden md:flex gap-8 text-sm opacity-80">
+<nav class="navbar">
+<h1>ReliefVision</h1>
+<div class="nav-links">
 <a href="#about">About</a>
 <a href="#problem">Problem</a>
 <a href="#solution">Solution</a>
@@ -105,146 +26,115 @@ ul li {
 </div>
 </nav>
 
-<main class="max-w-6xl mx-auto px-6 pt-40 space-y-32">
+<main class="container">
 
-<!-- HERO -->
-<section class="text-center reveal">
-<h1 class="text-7xl font-extrabold mb-6 leading-tight">
-<span class="gradient-text">ReliefVision</span>
-</h1>
+<section class="hero">
+<h1 class="gradient-text">ReliefVision</h1>
 
-<p class="text-lg text-slate-400 max-w-2xl mx-auto italic leading-relaxed">
-AI-powered disaster detection & decision support system using satellite imagery.
+<p>
+An AI-powered disaster detection and decision support system that leverages satellite imagery and computer vision techniques to identify damage, assess severity, and assist in rapid response planning.
 </p>
 
-<div class="mt-8 text-sm text-slate-500 space-y-1">
+<div class="info">
 <p><strong>Bhumija Goswami</strong></p>
 <p>Reg No: 2427030257</p>
 <p>Guide: Dr Ajay Kumar</p>
 </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="glass p-10 rounded-3xl reveal">
-<h2 class="text-3xl font-bold mb-4">About the Project</h2>
-<p class="text-slate-400 leading-relaxed">
-AI-powered disaster detection system using SSIM and computer vision.
-Detects damage, evaluates severity, assigns priority, and generates alerts.
+<section id="about" class="card">
+<h2>About the Project</h2>
+<p>
+ReliefVision processes pre- and post-disaster satellite images using Structural Similarity Index (SSIM). It detects structural changes, estimates damage severity, and generates prioritized alerts for disaster response.
 </p>
 </section>
 
-<!-- PROBLEM -->
-<section id="problem" class="grid md:grid-cols-2 gap-10 reveal">
-<div class="glass p-8 rounded-3xl border-l-4 border-blue-500">
-<h2 class="text-2xl font-bold mb-4">Problem Statement</h2>
-<p class="text-slate-400 leading-relaxed">
-Manual disaster analysis is slow → delayed response → higher damage impact.
+<section id="problem" class="two-col">
+<div class="card">
+<h2>Problem Statement</h2>
+<p>
+Traditional disaster analysis is manual and slow, leading to delayed emergency response and inefficient resource allocation.
 </p>
 </div>
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-blue-400 font-bold mb-2">Why Needed?</h3>
-<p class="text-slate-500 text-sm">
-Automation + speed + intelligent response.
+<div class="card">
+<h2>Need for System</h2>
+<p>
+An automated system is required to quickly detect damage, evaluate severity, and provide actionable insights for disaster management authorities.
 </p>
 </div>
 </section>
 
-<!-- SOLUTION -->
-<section id="solution" class="glass p-10 rounded-3xl reveal">
-<h2 class="text-3xl font-bold mb-4">Proposed Solution</h2>
-<p class="text-slate-400 leading-relaxed">
-Uses SSIM to compare images, classify severity, assign priorities,
-and generate actionable alerts.
+<section id="solution" class="card">
+<h2>Proposed Solution</h2>
+<p>
+The system uses SSIM to compare satellite images, classify damage severity, assign priority levels, and generate alerts with recommended actions.
 </p>
 </section>
 
-<!-- METHODOLOGY -->
-<section id="methodology" class="reveal">
-<h2 class="text-4xl text-center font-bold mb-12">Methodology</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-<div class="glass p-6 text-center">Image Upload</div>
-<div class="glass p-6 text-center">Preprocessing</div>
-<div class="glass p-6 text-center">Cloud Masking</div>
-<div class="glass p-6 text-center">SSIM Analysis</div>
-<div class="glass p-6 text-center">Thresholding</div>
-<div class="glass p-6 text-center">Damage Estimation</div>
+<section id="methodology">
+<h2>Methodology</h2>
+<div class="grid">
+<div class="card">Image Acquisition</div>
+<div class="card">Preprocessing</div>
+<div class="card">Cloud Masking</div>
+<div class="card">SSIM Computation</div>
+<div class="card">Thresholding</div>
+<div class="card">Damage Estimation</div>
 </div>
 </section>
 
-<!-- WORKFLOW -->
-<section id="workflow" class="reveal">
-<h2 class="text-4xl text-center font-bold mb-12">Workflow</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-<div class="glass p-6 text-center">Input</div>
-<div class="glass p-6 text-center">SSIM</div>
-<div class="glass p-6 text-center">Detection</div>
-<div class="glass p-6 text-center">Severity</div>
-<div class="glass p-6 text-center">Priority</div>
-<div class="glass p-6 text-center">Alerts</div>
+<section id="workflow">
+<h2>System Workflow</h2>
+<div class="workflow">
+<div class="card">Input</div>
+<span>→</span>
+<div class="card">SSIM</div>
+<span>→</span>
+<div class="card">Detection</div>
+<span>→</span>
+<div class="card">Severity</div>
+<span>→</span>
+<div class="card">Priority</div>
+<span>→</span>
+<div class="card">Alerts</div>
 </div>
 </section>
 
-<!-- ALERT -->
-<section id="alerts" class="glass p-10 rounded-3xl reveal">
-<h2 class="text-3xl font-bold mb-4">Alert System</h2>
-<p class="text-slate-400 leading-relaxed">
-Generates alerts with severity, priority, and recommended actions.
+<section id="alerts" class="card">
+<h2>Alert System</h2>
+<p>
+Generates alerts with severity classification, priority ranking, and recommended actions for response teams.
 </p>
 </section>
 
-<!-- FUTURE -->
-<section id="future" class="glass p-10 rounded-3xl reveal">
-<h2 class="text-3xl font-bold mb-4">Future Scope</h2>
-
-<ul class="text-slate-400 leading-relaxed space-y-2">
-<li>• Real-time satellite APIs</li>
-<li>• Weather integration</li>
-<li>• Deep learning classification</li>
-<li>• GIS mapping</li>
+<section id="future" class="card">
+<h2>Future Scope</h2>
+<ul>
+<li>Real-time satellite APIs</li>
+<li>Weather integration</li>
+<li>Deep learning classification</li>
+<li>GIS mapping</li>
 </ul>
 </section>
 
-<!-- DEMO (FIXED SPACING) -->
-<section class="text-center reveal mt-10">
-<div class="mt-6">
+<section class="demo">
 <a href="https://reliefvision.streamlit.app" target="_blank" class="btn">
 🚀 Launch Live Demo
 </a>
-</div>
 </section>
 
 </main>
 
-<footer class="text-center py-12 text-slate-500 border-t border-slate-800 mt-20">
+<footer>
 © 2026 ReliefVision | Bhumija Goswami
 </footer>
 
 <script>
-/* TIMER */
 let sec=0;
 function startTimer(){
-setInterval(()=>{
-sec++;
-let m=Math.floor(sec/60);
-let s=sec%60;
-document.getElementById("displayTime").innerText=
-`${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-},1000);
+setInterval(()=>{sec++;},1000);
 }
-
-/* REVEAL */
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-reveals.forEach(el=>{
-const top=el.getBoundingClientRect().top;
-if(top<window.innerHeight-100){
-el.classList.add("active");
-}
-});
-});
 </script>
 
 </body>
