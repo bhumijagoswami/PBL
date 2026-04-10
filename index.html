@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ReliefVision | PBL Project</title>
+    <title>Disaster Detection System | PBL</title>
 
-    <!-- Premium Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
@@ -12,21 +11,23 @@
 <body>
 
 <nav>
-    <div class="logo">ReliefVision</div>
+    <div class="logo">Disaster AI System</div>
     <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#problem">Problem</a></li>
         <li><a href="#solution">Solution</a></li>
         <li><a href="#methodology">Methodology</a></li>
-        <li><a href="#progress">Progress</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#alerts">Alerts</a></li>
         <li><a href="#future">Future</a></li>
-        <li><a href="#demo">Live Demo</a></li>
+        <li><a href="#demo">Demo</a></li>
     </ul>
 </nav>
 
 <header class="hero">
-    <h1>ReliefVision</h1>
-    <h2>Satellite-Based Disaster Damage Assessment System</h2>
+    <h1>Disaster Detection & Decision Support System</h1>
+    <h2>AI-Based Satellite Disaster Analysis Platform</h2>
+
     <div class="author-info">
         <p><strong>Bhumija Goswami</strong></p>
         <p>Reg No: 2427030257</p>
@@ -37,27 +38,34 @@
 <section id="about" class="section reveal">
     <h2>About the Project</h2>
     <p>
-        ReliefVision is an intelligent disaster assessment platform that leverages
-        Structural Similarity Index (SSIM) and computer vision techniques to analyze
-        satellite imagery and detect structural changes caused by natural disasters.
+        This project is an AI-powered disaster detection and decision support system 
+        that analyzes satellite imagery using Structural Similarity Index (SSIM) 
+        and computer vision techniques.
+
+        Unlike traditional systems, it not only detects damage but also evaluates severity, 
+        assigns priority levels, and generates intelligent alerts to assist disaster response teams.
     </p>
 </section>
 
 <section id="problem" class="section reveal">
     <h2>Problem Statement</h2>
     <p>
-        Manual disaster impact analysis using satellite imagery is slow and resource-intensive.
-        There is a need for automated systems capable of detecting affected regions
-        and quantifying damage efficiently.
+        Natural disasters such as floods, wildfires, and earthquakes cause large-scale destruction. 
+        Manual analysis of satellite images is slow and inefficient, leading to delayed response.
+
+        There is a need for automated systems that can quickly detect damage, assess severity, 
+        and assist in decision-making for faster disaster response.
     </p>
 </section>
 
 <section id="solution" class="section reveal">
     <h2>Proposed Solution</h2>
     <p>
-        ReliefVision compares pre-disaster and post-disaster satellite imagery,
-        applies SSIM-based structural comparison, segments impacted regions,
-        and estimates the percentage of affected area.
+        The system compares pre- and post-disaster satellite images using SSIM to detect structural changes. 
+        It classifies damage severity (Low, Medium, High), assigns priority levels, and generates 
+        actionable alerts with recommended response strategies.
+
+        The platform supports multiple disaster types including floods, fires, and earthquakes.
     </p>
 </section>
 
@@ -75,37 +83,50 @@
     </div>
 </section>
 
-<section id="progress" class="section reveal">
-    <h2>Implementation Progress</h2>
-    <ul>
-        <li>SSIM-based structural detection implemented</li>
-        <li>Cloud masking integrated</li>
-        <li>Sensitivity control slider added</li>
-        <li>Streamlit web application deployed</li>
-        <li>GitHub-hosted documentation portal created</li>
-    </ul>
+<section id="workflow" class="section reveal">
+    <h2>System Workflow</h2>
+    <div class="grid">
+        <div class="card">Image Input</div>
+        <div class="card">Preprocessing</div>
+        <div class="card">SSIM Comparison</div>
+        <div class="card">Damage Detection</div>
+        <div class="card">Severity Analysis</div>
+        <div class="card">Priority Assignment</div>
+        <div class="card">Alert Generation</div>
+    </div>
+</section>
+
+<section id="alerts" class="section reveal">
+    <h2>Alert & Decision System</h2>
+    <p>
+        The system generates intelligent alerts based on detected damage severity. 
+        Each alert includes severity level, priority ranking, and recommended actions 
+        such as immediate rescue, monitoring, or low-risk observation.
+
+        This transforms the system from a detection tool into a decision-support platform.
+    </p>
 </section>
 
 <section id="future" class="section reveal">
     <h2>Future Scope</h2>
     <ul>
-        <li>Automatic image alignment</li>
-        <li>NDVI & spectral index integration</li>
-        <li>Google Earth Engine API integration</li>
-        <li>ML-based severity classification</li>
-        <li>Time-series disaster intelligence dashboard</li>
+        <li>Real-time satellite API integration</li>
+        <li>Weather API for contextual intelligence</li>
+        <li>AI-based damage classification using deep learning</li>
+        <li>Geospatial mapping with GIS tools</li>
+        <li>Automated report generation for disaster agencies</li>
     </ul>
 </section>
 
 <section id="demo" class="section demo reveal">
     <h2>Live Application</h2>
     <a href="https://reliefvision.streamlit.app" target="_blank" class="demo-btn">
-        Launch ReliefVision
+        Launch Live System
     </a>
 </section>
 
 <footer>
-    <p>© 2026 ReliefVision | Developed by Bhumija Goswami</p>
+    <p>© 2026 Disaster Detection System | Developed by Bhumija Goswami</p>
 </footer>
 
 <div id="visit-timer">00:00</div>
