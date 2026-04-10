@@ -11,20 +11,34 @@ body {
 .navbar {
     position: fixed;
     width: 100%;
+    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
-    padding: 20px 50px;
-    background: rgba(0,0,0,0.5);
+    z-index: 1000;
 }
 
+/* GLASS EFFECT */
+.glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* NAV LINKS */
 .nav-links {
     display: flex;
-    gap: 20px;
+    gap: 25px;
 }
 
 .nav-links a {
-    color: white;
+    color: #cbd5f5;
     text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #60a5fa;
 }
 
 /* FIX SCROLL */
@@ -34,15 +48,16 @@ section {
 
 /* CONTAINER */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
-    padding-top: 150px;
+    padding-top: 140px;
     text-align: center;
 }
 
 /* HERO */
 .hero h1 {
-    font-size: 60px;
+    font-size: 70px;
+    margin-bottom: 20px;
 }
 
 /* TEXT */
@@ -54,24 +69,28 @@ section {
 
 /* CARD */
 .card {
-    background: rgba(255,255,255,0.05);
     padding: 30px;
     border-radius: 20px;
     margin: 40px 0;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
 }
 
 /* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-    gap: 15px;
+    gap: 20px;
 }
 
 /* TWO COL */
 .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 25px;
 }
 
 /* WORKFLOW */
@@ -79,21 +98,56 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
     align-items: center;
+    gap: 12px;
+}
+
+.arrow {
+    font-size: 20px;
+    opacity: 0.6;
 }
 
 /* BUTTON */
 .btn {
-    padding: 12px 25px;
-    background: blue;
-    border-radius: 30px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,#3b82f6,#6366f1);
     text-decoration: none;
     color: white;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(59,130,246,0.7);
+}
+
+/* LIST FIX */
+ul {
+    list-style-position: inside;
+    padding: 0;
+}
+
+ul li {
+    margin: 8px 0;
+}
+
+/* REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
+    opacity: 0.6;
 }
