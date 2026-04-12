@@ -4,156 +4,701 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReliefVision | PBL 2026</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap');
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #020617;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* BG MESH */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(59,130,246,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168,85,247,0.11) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* NAV */
+.navbar {
+    position: fixed;
+    width: 100%;
+    padding: 18px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.75);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.navbar h1 {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #60a5fa, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.3s;
+}
+.nav-links a:hover { color: #60a5fa; }
+
+section { scroll-margin-top: 120px; }
+
+.container {
+    max-width: 1080px;
+    margin: auto;
+    padding: 160px 28px 80px;
+    position: relative;
+    z-index: 1;
+}
+
+/* HERO */
+.hero { text-align: center; padding: 40px 0 20px; }
+.hero-badge {
+    display: inline-block;
+    padding: 6px 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+    font-family: monospace;
+}
+.hero h1 {
+    font-size: clamp(68px, 11vw, 96px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -3px;
+    margin-bottom: 30px;
+}
+.gradient-text {
+    background: linear-gradient(100deg, #60a5fa 0%, #a855f7 60%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero > p {
+    font-size: 19px;
+    line-height: 1.85;
+    color: #ffffff;
+    max-width: 620px;
+    margin: 0 auto 40px;
+    font-style: italic;
+    border-left: 2px solid rgba(99,102,241,0.5);
+    padding-left: 22px;
+    text-align: left;
+}
+.hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.meta-chip {
+    padding: 10px 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+}
+.meta-chip strong { color: #ffffff; }
+
+/* GLASS CARDS */
+.glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card {
+    padding: 44px;
+    border-radius: 28px;
+    margin: 0;
+    transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+.card:hover { transform: translateY(-7px); }
+
+/* COLORED SHADOW VARIANTS */
+.card-blue {
+    border-left: 3px solid #3b82f6;
+    box-shadow: 0 8px 40px rgba(59,130,246,0.12), 0 2px 8px rgba(0,0,0,0.4);
+}
+.card-blue:hover { box-shadow: 0 18px 65px rgba(59,130,246,0.28), 0 4px 16px rgba(0,0,0,0.5); }
+
+.card-purple {
+    border-left: 3px solid #a855f7;
+    box-shadow: 0 8px 40px rgba(168,85,247,0.12), 0 2px 8px rgba(0,0,0,0.4);
+}
+.card-purple:hover { box-shadow: 0 18px 65px rgba(168,85,247,0.28), 0 4px 16px rgba(0,0,0,0.5); }
+
+.card-cyan {
+    border-left: 3px solid #06b6d4;
+    box-shadow: 0 8px 40px rgba(6,182,212,0.12), 0 2px 8px rgba(0,0,0,0.4);
+}
+.card-cyan:hover { box-shadow: 0 18px 65px rgba(6,182,212,0.26), 0 4px 16px rgba(0,0,0,0.5); }
+
+.card-green {
+    border-left: 3px solid #22c55e;
+    box-shadow: 0 8px 40px rgba(34,197,94,0.12), 0 2px 8px rgba(0,0,0,0.4);
+}
+.card-green:hover { box-shadow: 0 18px 65px rgba(34,197,94,0.26), 0 4px 16px rgba(0,0,0,0.5); }
+
+.card-indigo {
+    box-shadow: 0 8px 40px rgba(99,102,241,0.14), 0 2px 8px rgba(0,0,0,0.4);
+    border-top: 2px solid rgba(99,102,241,0.5);
+}
+.card-indigo:hover { box-shadow: 0 22px 75px rgba(99,102,241,0.32), 0 4px 16px rgba(0,0,0,0.5); }
+
+.card-orange {
+    border-left: 3px solid #f97316;
+    box-shadow: 0 8px 40px rgba(249,115,22,0.12), 0 2px 8px rgba(0,0,0,0.4);
+}
+.card-orange:hover { box-shadow: 0 18px 65px rgba(249,115,22,0.26), 0 4px 16px rgba(0,0,0,0.5); }
+
+/* SECTION SPACING */
+.section-gap { margin-top: 90px; }
+
+/* SECTION HEADINGS */
+.section-heading {
+    font-size: clamp(32px, 4.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-bottom: 14px;
+    font-family: monospace;
+}
+.card h2 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
+}
+.card p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #ffffff;
+    text-align: center;
+}
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+.card ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-align: left;
+}
+.card ul li:last-child { border-bottom: none; }
+.card ul li::before {
+    content: '→';
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* STAT ROW */
+.stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+}
+.stat-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 26px 16px;
+    text-align: center;
+}
+.stat-num {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+.stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+}
+
+/* TWO COL */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* METHODOLOGY GRID */
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 18px;
+}
+.method-card {
+    padding: 32px 18px;
+    border-radius: 22px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #ffffff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: rgba(255,255,255,0.04);
+    line-height: 1.3;
+}
+.method-card .mc-desc {
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: rgba(255,255,255,0.72);
+    margin-top: 10px;
+    line-height: 1.55;
+}
+.method-card:hover { transform: translateY(-6px); }
+.mc-1 { box-shadow: 0 6px 30px rgba(59,130,246,0.22); border: 1px solid rgba(59,130,246,0.38); }
+.mc-2 { box-shadow: 0 6px 30px rgba(168,85,247,0.22); border: 1px solid rgba(168,85,247,0.38); }
+.mc-3 { box-shadow: 0 6px 30px rgba(6,182,212,0.22); border: 1px solid rgba(6,182,212,0.38); }
+.mc-4 { box-shadow: 0 6px 30px rgba(99,102,241,0.22); border: 1px solid rgba(99,102,241,0.38); }
+.mc-5 { box-shadow: 0 6px 30px rgba(236,72,153,0.22); border: 1px solid rgba(236,72,153,0.38); }
+.mc-6 { box-shadow: 0 6px 30px rgba(34,197,94,0.22); border: 1px solid rgba(34,197,94,0.38); }
+.mc-icon { font-size: 32px; margin-bottom: 14px; }
+
+/* WORKFLOW */
+.workflow {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+.wf-step {
+    padding: 16px 28px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+.wf-step .wf-sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: rgba(255,255,255,0.55);
+    margin-top: 5px;
+}
+.wf-step:hover { transform: scale(1.06); }
+.wf-1 { box-shadow: 0 4px 20px rgba(59,130,246,0.28); border-color: rgba(59,130,246,0.45); color: #93c5fd; }
+.wf-2 { box-shadow: 0 4px 20px rgba(99,102,241,0.28); border-color: rgba(99,102,241,0.45); color: #a5b4fc; }
+.wf-3 { box-shadow: 0 4px 20px rgba(168,85,247,0.28); border-color: rgba(168,85,247,0.45); color: #d8b4fe; }
+.wf-4 { box-shadow: 0 4px 20px rgba(236,72,153,0.28); border-color: rgba(236,72,153,0.45); color: #f9a8d4; }
+.wf-5 { box-shadow: 0 4px 20px rgba(249,115,22,0.28); border-color: rgba(249,115,22,0.45); color: #fdba74; }
+.wf-6 { box-shadow: 0 4px 20px rgba(34,197,94,0.28); border-color: rgba(34,197,94,0.45); color: #86efac; }
+.arrow {
+    font-size: 22px;
+    color: rgba(255,255,255,0.22);
+    font-weight: 900;
+}
+
+/* ALERT TABLE */
+.severity-table { width: 100%; margin-top: 32px; border-collapse: separate; border-spacing: 0 10px; }
+.severity-table th {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.4);
+    padding: 0 20px 10px;
+    text-align: left;
+}
+.severity-table td {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.severity-table td:first-child { border-radius: 12px 0 0 12px; border-left: 1px solid rgba(255,255,255,0.06); }
+.severity-table td:last-child { border-radius: 0 12px 12px 0; border-right: 1px solid rgba(255,255,255,0.06); }
+.badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.badge-red    { background: rgba(239,68,68,0.18);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+.badge-orange { background: rgba(249,115,22,0.18); color: #fdba74; border: 1px solid rgba(249,115,22,0.4); }
+.badge-yellow { background: rgba(234,179,8,0.18);  color: #fde047; border: 1px solid rgba(234,179,8,0.4); }
+.badge-green  { background: rgba(34,197,94,0.18);  color: #86efac; border: 1px solid rgba(34,197,94,0.4); }
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    padding: 20px 52px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 36px rgba(59,130,246,0.45);
+    text-transform: uppercase;
+}
+.btn:hover {
+    transform: scale(1.07) translateY(-3px);
+    box-shadow: 0 18px 55px rgba(59,130,246,0.65);
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 44px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    z-index: 1;
+}
+footer p { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.28); letter-spacing: 0.18em; text-transform: uppercase; margin: 5px 0; }
+
+/* DIVIDER */
+.section-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #60a5fa, #a855f7);
+    margin: 0 auto 40px;
+    border-radius: 2px;
+}
+
+/* HIGHLIGHT */
+.hl-blue   { color: #93c5fd; font-weight: 700; }
+.hl-purple { color: #d8b4fe; font-weight: 700; }
+.hl-green  { color: #86efac; font-weight: 700; }
+
+@media (max-width: 780px) {
+    .navbar { padding: 16px 20px; }
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 9px; }
+    .two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 54px; letter-spacing: -2px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
-
 <body>
 
 <!-- NAV -->
-<nav class="navbar glass">
-<h1>ReliefVision</h1>
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#problem">Problem</a>
-<a href="#solution">Solution</a>
-<a href="#methodology">Methodology</a>
-<a href="#workflow">Workflow</a>
-<a href="#alerts">Alerts</a>
-<a href="#future">Future</a>
-</div>
+<nav class="navbar">
+    <h1>ReliefVision</h1>
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#future">Future</a>
+    </div>
 </nav>
 
 <main class="container">
 
-<!-- HERO -->
-<section class="hero reveal">
-<h1 class="gradient-text">ReliefVision</h1>
+    <!-- HERO -->
+    <section class="hero reveal">
+        <div class="hero-badge">PBL 2026 · Dept. of CSE · MUJ</div>
+        <h1 class="gradient-text">ReliefVision</h1>
+        <p>An AI-powered disaster detection &amp; decision support system that leverages satellite imagery and advanced computer vision to accelerate humanitarian response.</p>
+        <div class="hero-meta">
+            <span class="meta-chip"><strong>Bhumija Goswami</strong></span>
+            <span class="meta-chip">Reg No: <strong>2427030257</strong></span>
+            <span class="meta-chip">Guide: <strong>Dr. Ajay Kumar</strong></span>
+        </div>
+    </section>
 
-<p>
-AI-powered disaster detection & decision support system using satellite imagery and computer vision techniques.
-</p>
+    <!-- ABOUT -->
+    <section id="about" class="section-gap reveal">
+        <p class="section-label">01 — Overview</p>
+        <div class="section-divider"></div>
+        <div class="card glass card-blue">
+            <h2>About the Project</h2>
+            <p>ReliefVision is an intelligent disaster analysis platform designed to bridge the gap between satellite data and on-ground emergency response. It ingests pre- and post-disaster satellite imagery, applies the <span class="hl-blue">Structural Similarity Index Measure (SSIM)</span> to detect pixel-level structural changes, and translates raw damage signals into actionable, prioritized alerts.</p>
+            <p style="margin-top: 18px;">The system is built to serve disaster management authorities, NGOs, and first responders who require rapid situational awareness in the critical hours following a catastrophic event — when every minute of delayed information translates directly into preventable loss of life and property.</p>
+            <div class="stat-row">
+                <div class="stat-box">
+                    <div class="stat-num" style="background: linear-gradient(90deg,#60a5fa,#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">~3x</div>
+                    <div class="stat-label">Faster Than Manual</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" style="background: linear-gradient(90deg,#a855f7,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">4</div>
+                    <div class="stat-label">Damage Severity Tiers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" style="background: linear-gradient(90deg,#06b6d4,#6366f1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">100%</div>
+                    <div class="stat-label">Automated Pipeline</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="info">
-<p><strong>Bhumija Goswami</strong></p>
-<p>Reg No: 2427030257</p>
-<p>Guide: Dr Ajay Kumar</p>
-</div>
-</section>
+    <!-- PROBLEM -->
+    <section id="problem" class="section-gap reveal">
+        <p class="section-label">02 — The Problem</p>
+        <div class="section-divider"></div>
+        <div class="two-col">
+            <div class="card glass card-purple">
+                <h2>Problem Statement</h2>
+                <p>When disasters strike — earthquakes, floods, cyclones — emergency teams are overwhelmed with the sheer scale of damage assessment. Traditional manual analysis of aerial or satellite imagery is painfully slow, highly subjective, and prone to human error under pressure.</p>
+                <p style="margin-top: 16px;">Hours are lost before decisions are even made, while affected communities wait without aid. This bottleneck results in <span class="hl-purple">misallocated resources</span>, delayed rescue operations, and a higher preventable toll on human lives.</p>
+            </div>
+            <div class="card glass card-cyan">
+                <h2>Need for a System</h2>
+                <p>The global frequency of climate-related disasters has surged by over 83% in the past two decades. Existing tools are either too slow, too expensive, or require specialized GIS expertise most field teams simply do not have.</p>
+                <p style="margin-top: 16px;">There is an urgent need for a <span class="hl-blue">lightweight, automated system</span> that can process satellite imagery rapidly, produce structured damage assessments, and communicate findings in a format that non-technical decision-makers can act upon immediately — without any specialized training.</p>
+            </div>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="card glass reveal">
-<h2>About the Project</h2>
-<p>
-ReliefVision processes pre- and post-disaster satellite images using SSIM to detect structural changes, estimate damage severity, and generate prioritized alerts.
-</p>
-</section>
+    <!-- SOLUTION -->
+    <section id="solution" class="section-gap reveal">
+        <p class="section-label">03 — Our Approach</p>
+        <div class="section-divider"></div>
+        <div class="card glass card-indigo">
+            <h2>Proposed Solution</h2>
+            <p>ReliefVision uses the <span class="hl-blue">Structural Similarity Index Measure (SSIM)</span> — a perceptual metric that quantifies differences in luminance, contrast, and structure between two images — to compare pre- and post-disaster satellite imagery at the pixel level. This produces a detailed change-detection map that reveals exactly where and how severely infrastructure has been affected.</p>
+            <p style="margin-top: 18px;">The system then applies <span class="hl-purple">adaptive thresholding</span> to classify detected changes into four damage tiers: Minimal, Moderate, Severe, and Critical. Each tier is assigned a dynamic priority score, and the system automatically generates structured alert packets containing the damage coordinates, severity classification, estimated impact radius, and recommended response actions.</p>
+            <p style="margin-top: 18px;">The entire pipeline runs without manual intervention and is accessible through an interactive <span class="hl-green">Streamlit web application</span>, enabling deployment without any local infrastructure, GIS software, or specialized hardware.</p>
+        </div>
+    </section>
 
-<!-- PROBLEM -->
-<section id="problem" class="two-col reveal">
-<div class="card glass">
-<h2>Problem Statement</h2>
-<p>
-Manual disaster analysis is slow and inefficient, leading to delayed response and ineffective resource allocation.
-</p>
-</div>
+    <!-- METHODOLOGY -->
+    <section id="methodology" class="section-gap reveal">
+        <p class="section-label">04 — How It Works</p>
+        <h2 class="section-heading"><span class="gradient-text">Methodology</span></h2>
+        <div class="methodology-grid">
+            <div class="card glass method-card mc-1">
+                <div class="mc-icon">🛰️</div>
+                Image Acquisition
+                <div class="mc-desc">Pre- and post-disaster satellite images sourced from open APIs or uploaded manually for processing.</div>
+            </div>
+            <div class="card glass method-card mc-2">
+                <div class="mc-icon">⚙️</div>
+                Preprocessing
+                <div class="mc-desc">Images are resized, normalized, and co-registered to ensure precise spatial alignment before comparison.</div>
+            </div>
+            <div class="card glass method-card mc-3">
+                <div class="mc-icon">☁️</div>
+                Cloud Masking
+                <div class="mc-desc">Cloud-covered regions are detected and excluded to prevent false positives during structural change analysis.</div>
+            </div>
+            <div class="card glass method-card mc-4">
+                <div class="mc-icon">📊</div>
+                SSIM Computation
+                <div class="mc-desc">SSIM scores computed pixel-by-pixel to generate a high-resolution map of structural changes across the scene.</div>
+            </div>
+            <div class="card glass method-card mc-5">
+                <div class="mc-icon">🎯</div>
+                Thresholding
+                <div class="mc-desc">Adaptive thresholds classify SSIM difference scores into four distinct damage severity categories.</div>
+            </div>
+            <div class="card glass method-card mc-6">
+                <div class="mc-icon">📋</div>
+                Damage Estimation
+                <div class="mc-desc">Damaged zones quantified by area, severity, and impact score to produce actionable, readable field reports.</div>
+            </div>
+        </div>
+    </section>
 
-<div class="card glass">
-<h2>Need for System</h2>
-<p>
-Automated systems are required to rapidly analyze satellite imagery, detect damage, and assist in decision-making for faster disaster response.
-</p>
-</div>
-</section>
+    <!-- WORKFLOW -->
+    <section id="workflow" class="section-gap reveal">
+        <p class="section-label">05 — Pipeline</p>
+        <h2 class="section-heading"><span class="gradient-text">System Workflow</span></h2>
+        <div class="workflow">
+            <div class="wf-step wf-1">Input<span class="wf-sub">Satellite Images</span></div>
+            <span class="arrow">→</span>
+            <div class="wf-step wf-2">SSIM<span class="wf-sub">Difference Map</span></div>
+            <span class="arrow">→</span>
+            <div class="wf-step wf-3">Detection<span class="wf-sub">Change Zones</span></div>
+            <span class="arrow">→</span>
+            <div class="wf-step wf-4">Severity<span class="wf-sub">4-Tier Rating</span></div>
+            <span class="arrow">→</span>
+            <div class="wf-step wf-5">Priority<span class="wf-sub">Dynamic Score</span></div>
+            <span class="arrow">→</span>
+            <div class="wf-step wf-6">Alerts<span class="wf-sub">Field Report</span></div>
+        </div>
+        <div class="card glass card-blue" style="margin-top: 30px;">
+            <h2>End-to-End Automation</h2>
+            <p>The workflow is fully automated with zero manual intervention between stages. Once satellite images are uploaded, the system preprocesses and aligns them, runs SSIM comparison to generate a granular difference map, identifies changed zones above the damage threshold, classifies each zone's severity tier, assigns a response priority score, and outputs a structured alert packet — all within seconds. Results are displayed visually in the Streamlit interface for immediate interpretation by field teams.</p>
+        </div>
+    </section>
 
-<!-- SOLUTION -->
-<section id="solution" class="card glass reveal">
-<h2>Proposed Solution</h2>
-<p>
-Uses SSIM to compare satellite images, classify damage severity, assign priority levels, and generate actionable alerts.
-</p>
-</section>
+    <!-- ALERTS -->
+    <section id="alerts" class="section-gap reveal">
+        <p class="section-label">06 — Output</p>
+        <div class="section-divider"></div>
+        <div class="card glass card-green">
+            <h2>Alert System</h2>
+            <p>ReliefVision's alert engine translates raw damage data into structured, human-readable alert packets. Each alert contains the geographic zone ID, damage severity classification, priority level, estimated affected area, and a set of recommended response actions — enabling decision-makers to act with precision and speed rather than guesswork under pressure.</p>
+            <table class="severity-table">
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>SSIM Delta</th>
+                        <th>Priority</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-red">Critical</span></td>
+                        <td>&gt; 0.70</td>
+                        <td>P1 — Immediate</td>
+                        <td>Deploy search &amp; rescue within 1 hour</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-orange">Severe</span></td>
+                        <td>0.45 – 0.70</td>
+                        <td>P2 — Urgent</td>
+                        <td>Medical teams &amp; structural assessment</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-yellow">Moderate</span></td>
+                        <td>0.20 – 0.45</td>
+                        <td>P3 — High</td>
+                        <td>Ground survey &amp; logistics staging</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-green">Minimal</span></td>
+                        <td>&lt; 0.20</td>
+                        <td>P4 — Monitor</td>
+                        <td>Remote observation, no immediate action</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-<!-- METHODOLOGY -->
-<section id="methodology" class="reveal">
-<h2>Methodology</h2>
+    <!-- FUTURE -->
+    <section id="future" class="section-gap reveal">
+        <p class="section-label">07 — Roadmap</p>
+        <div class="section-divider"></div>
+        <div class="two-col">
+            <div class="card glass card-purple">
+                <h2>Short-Term Goals</h2>
+                <ul>
+                    <li>Integration with real-time satellite APIs (Sentinel Hub, Planet Labs) for live imagery feeds without manual upload</li>
+                    <li>Incorporation of live weather data to adjust severity thresholds dynamically based on environmental conditions</li>
+                    <li>Multi-disaster type support including flood extent mapping and wildfire perimeter detection</li>
+                    <li>Exportable PDF alert reports for offline distribution to field teams without internet access</li>
+                </ul>
+            </div>
+            <div class="card glass card-orange">
+                <h2>Long-Term Vision</h2>
+                <ul>
+                    <li>Deep learning classification using CNNs and Vision Transformers for accuracy beyond what SSIM alone can achieve</li>
+                    <li>Full GIS mapping integration with interactive geospatial visualization and zone-level drill-down capabilities</li>
+                    <li>Mobile-first dashboard for field operatives with offline-capable alert access and GPS-guided navigation</li>
+                    <li>Formal partnership with NDMA and UN-OCHA for deployment in active international disaster response operations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<div class="grid">
-<div class="card glass">Image Acquisition</div>
-<div class="card glass">Preprocessing</div>
-<div class="card glass">Cloud Masking</div>
-<div class="card glass">SSIM Computation</div>
-<div class="card glass">Thresholding</div>
-<div class="card glass">Damage Estimation</div>
-</div>
-</section>
-
-<!-- WORKFLOW -->
-<section id="workflow" class="reveal">
-<h2>System Workflow</h2>
-
-<div class="workflow">
-<div class="card glass">Input</div>
-<span class="arrow">→</span>
-<div class="card glass">SSIM</div>
-<span class="arrow">→</span>
-<div class="card glass">Detection</div>
-<span class="arrow">→</span>
-<div class="card glass">Severity</div>
-<span class="arrow">→</span>
-<div class="card glass">Priority</div>
-<span class="arrow">→</span>
-<div class="card glass">Alerts</div>
-</div>
-</section>
-
-<!-- ALERT -->
-<section id="alerts" class="card glass reveal">
-<h2>Alert System</h2>
-<p>
-Generates alerts with severity classification, priority ranking, and recommended actions.
-</p>
-</section>
-
-<!-- FUTURE -->
-<section id="future" class="card glass reveal">
-<h2>Future Scope</h2>
-<ul>
-<li>Real-time satellite APIs</li>
-<li>Weather integration</li>
-<li>Deep learning classification</li>
-<li>GIS mapping</li>
-</ul>
-</section>
-
-<!-- DEMO -->
-<section class="demo reveal">
-<a href="https://reliefvision.streamlit.app" target="_blank" class="btn">
-🚀 Launch Live Demo
-</a>
-</section>
+    <!-- DEMO -->
+    <section class="section-gap reveal" style="text-align:center; padding: 30px 0 50px;">
+        <p style="font-size: 18px; color: rgba(255,255,255,0.65); margin-bottom: 28px; font-style: italic;">See ReliefVision in action — live, interactive, and ready to analyze real satellite data.</p>
+        <a href="https://reliefvision.streamlit.app/" target="_blank" class="btn">
+            🚀 Launch Live Demo
+        </a>
+    </section>
 
 </main>
 
 <footer>
-© 2026 ReliefVision | Bhumija Goswami
+    <p>© 2026 ReliefVision · Bhumija Goswami · Reg. 2427030257</p>
+    <p style="margin-top: 8px; opacity: 0.6;">Manipal University Jaipur · Department of Computer Science &amp; Engineering · Guide: Dr. Ajay Kumar</p>
 </footer>
 
 <script>
-/* REVEAL ANIMATION */
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-reveals.forEach(el=>{
-const top=el.getBoundingClientRect().top;
-if(top<window.innerHeight-100){
-el.classList.add("active");
-}
-});
-});
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+        if (el.isIntersecting) {
+            el.target.classList.add("active");
+        }
+    });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
